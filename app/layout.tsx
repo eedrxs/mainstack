@@ -18,11 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <Navbar />
-        <main>
+        <main className="flex">
           <Sidebar />
-          <div>{children}</div>
+          <div className="grow p-4 mt-[76px]">{children}</div>
         </main>
       </body>
     </html>

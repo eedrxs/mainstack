@@ -1,0 +1,110 @@
+/* Degular Thin */
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-Thin.otf");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-ThinItalic.otf");
+  font-weight: 100;
+  font-style: italic;
+}
+
+
+/* Degular Light */
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-Light.otf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-LightItalic.otf");
+  font-weight: 300;
+  font-style: italic;
+}
+
+
+/* Degular Regular */
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-Regular.otf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-Italic.otf");
+  font-weight: 400;
+  font-style: italic;
+}
+
+
+/* Degular Medium */
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-Medium.otf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-MediumItalic.otf");
+  font-weight: 500;
+  font-style: italic;
+}
+
+
+/* Degular Semibold */
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-Semibold.otf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-SemiboldItalic.otf");
+  font-weight: 600;
+  font-style: italic;
+}
+
+
+/* Degular Bold */
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-Bold.otf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-BoldItalic.otf");
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+/* Degular Black */
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-Black.otf");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Degular";
+  src: url("DegularDemo-BlackItalic.otf");
+  font-weight: 900;
+  font-style: italic;
+}

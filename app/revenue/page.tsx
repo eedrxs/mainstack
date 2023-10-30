@@ -1,7 +1,7 @@
 const Revenue = () => {
   return (
-    <div>
-      Enter
+    <div className="font-black text-2xl">
+      Revenue
     </div>
   );
 }

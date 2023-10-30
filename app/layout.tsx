@@ -22,7 +22,9 @@ export default function RootLayout({
         <Navbar />
         <main className="flex">
           <Sidebar />
-          <div className="grow p-4 mt-[76px]">{children}</div>
+          <div className="grow px-[76px] mt-[calc(76px+64px)]">
+            <div className="max-w-[1160px]">{children}</div>
+          </div>
         </main>
       </body>
     </html>

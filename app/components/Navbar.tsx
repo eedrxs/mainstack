@@ -71,7 +71,7 @@ const pages = [
     }
   },
   {
-    route: '#',
+    route: '/crm',
     title: 'CRM',
     icon: {
       outline: MdOutlinePeopleAlt,
@@ -79,7 +79,7 @@ const pages = [
     }
   },
   {
-    route: '#',
+    route: '/apps',
     title: 'Apps',
     icon: {
       outline: BiGridAlt,

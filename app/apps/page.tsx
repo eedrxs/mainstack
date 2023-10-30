@@ -1,7 +1,9 @@
-export default function Home() {
+const Apps = () => {
   return (
     <div className="font-black text-2xl">
-      Home
+      Apps
     </div>
-  )
+  );
 }
+
+export default Apps;

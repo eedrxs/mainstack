@@ -1,7 +1,7 @@
 const Analytics = () => {
   return (
-    <div className="h-[200rem]">
-      Enter
+    <div className="font-black text-2xl">
+      Analytics
     </div>
   );
 }

@@ -1,7 +1,9 @@
-export default function Home() {
+const CRM = () => {
   return (
     <div className="font-black text-2xl">
-      Home
+      CRM
     </div>
-  )
+  );
 }
+
+export default CRM;

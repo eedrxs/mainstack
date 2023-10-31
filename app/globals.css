@@ -9,6 +9,19 @@
   }
 }
 
+@layer utilities {
+  @variants responsive {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+  }
+}
+
 * {
   margin: 0;
   padding: 0;

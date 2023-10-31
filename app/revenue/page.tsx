@@ -7,6 +7,7 @@ import CaretDownIcon from "@/public/images/caret-down.svg"
 import DownloadIcon from "@/public/images/download.svg"
 import IncomingIcon from "@/public/images/incoming.svg"
 import OutgoingIcon from "@/public/images/outgoing.svg"
+import Filter from "../components/Filter"
 
 const Revenue = () => {
 
@@ -126,7 +127,9 @@ const Revenue = () => {
           </div>
         </div> */}
 
-        <NoResult onClearFilter={handleClearFilter} />
+        {/* <NoResult onClearFilter={handleClearFilter} /> */}
+
+        <Filter />
       </div>
 
       <div></div>

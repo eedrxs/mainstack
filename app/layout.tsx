@@ -22,10 +22,12 @@ export default function RootLayout({
         <Navbar />
         <main className="flex">
           <Sidebar />
-          <div className="grow px-[76px] mt-[calc(76px+64px)] pb-[5rem]">
+          <div className="grow px-[76px] mt-[calc(76px+64px)] pb-[15rem]">
             <div className="max-w-[1160px]">{children}</div>
           </div>
         </main>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/datepicker.min.js"></script>
       </body>
     </html>
   )

@@ -8,7 +8,7 @@ const Sidebar = () => {
   const boxShadow = "0px 6px 12px 0px rgba(92, 115, 131, 0.08), 0px 4px 8px 0px rgba(92, 115, 131, 0.08)"
   return (
     <div className="sticky top-[76px] h-[calc(100vh-76px)] flex items-center pl-4">
-      <div style={{boxShadow}} className="flex flex-col bg-white rounded-full gap-2 p-1">
+      <div style={{boxShadow}} className="flex flex-col shrink-0 bg-white rounded-full gap-2 p-1">
         <div className="grayscale p-2">
           <Image src={Icon1} alt="icon" />
         </div>

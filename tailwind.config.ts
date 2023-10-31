@@ -10,6 +10,9 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['Degular']
+      },
+      colors: {
+        primary: '#131316'
       }
     },
   },

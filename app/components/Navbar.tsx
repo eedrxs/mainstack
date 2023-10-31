@@ -21,20 +21,22 @@ const Navbar = () => {
   const accountInitialsGradient = "linear-gradient(139deg, #5C6670 2.33%, #131316 96.28%)"
 
   return (
-    <nav className="fixed top-0 w-full bg-white p-4 pb-0">
+    <nav className="fixed top-0 z-10 w-full bg-white p-4 pb-0">
       <div
         style={{ boxShadow: navShadow }}
         className="flex items-center justify-between rounded-full p-3 pl-6"
       >
+        {/* logo */}
         <div>
           <Image src={Logo} alt="logo" />
         </div>
 
+        {/* pages */}
         <div className="flex items-center gap-5">
           {pages.map((page) => {
             let isCurrentPage = currentPath == page.route
             const activePage = isCurrentPage
-              ? "text-white bg-[#131316]"
+              ? "text-white bg-primary"
               : "text-[#56616B]"
 
             return (
@@ -43,7 +45,7 @@ const Navbar = () => {
                 href={page.route}
                 className={
                   activePage +
-                  " flex items-center text-sm font-semibold rounded-full py-2 pl-[14px] pr-[18px]"
+                  " flex items-center text-sm font-semibold rounded-full h-10 py-2 pl-[14px] pr-[18px]"
                 }
               >
                 {!isCurrentPage && (
@@ -62,6 +64,7 @@ const Navbar = () => {
           })}
         </div>
 
+        {/* menu */}
         <div className="flex gap-2 items-center">
           <div className="p-[10px]">
             <Image src={NotificationIcon} alt="notification" />
@@ -72,7 +75,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center rounded-full bg-[#EFF1F6] gap-2 py-1 pl-[5px] pr-3">
-            <div style={{backgroundImage: accountInitialsGradient}} className="flex justify-center items-center rounded-full text-white font-semibold h-8 w-8">OJ</div>
+            <div style={{backgroundImage: accountInitialsGradient}} className="flex justify-center items-center shrink-0 rounded-full text-white font-semibold h-8 w-8">OJ</div>
 
             <Image src={BurgerIcon} alt="menu" />
           </div>

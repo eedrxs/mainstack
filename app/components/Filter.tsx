@@ -19,7 +19,7 @@ const Filter = () => {
         </div>
       </div>
 
-      <div className="mb-40">
+      <div className="mb-48">
         {/* time periods */}
         <div className="flex gap-3 flex-nowrap overflow-auto no-scrollbar mb-7">
           {periods.map(period => (
@@ -37,12 +37,12 @@ const Filter = () => {
         {/* transaction type */}
         <div className='mb-6'>
           <p className="font-semibold -tracking-[0.4px] mb-3">Transaction Type</p>
-          <SelectInput />
+          <SelectInput options={transactionTypeOptions} />
         </div>
         {/* transaction status */}
         <div>
           <p className="font-semibold -tracking-[0.4px] mb-3">Transaction Status</p>
-          <SelectInput />
+          <SelectInput options={transactionStatusOptions} />
         </div>
       </div>
 
@@ -74,3 +74,18 @@ const periods = [
     label: 'This year'
   },
 ]
+
+const transactionTypeOptions = [
+  { value: "1", label: "Store Transactions" },
+  { value: "2", label: "Get Tipped" },
+  { value: "3", label: "Withdrawals" },
+  { value: "4", label: "Chargebacks" },
+  { value: "5", label: "Cashbacks" },
+  { value: "6", label: "Refer & Earn" },
+];
+
+const transactionStatusOptions = [
+  { value: "1", label: "Successful" },
+  { value: "2", label: "Pending" },
+  { value: "3", label: "Failed" },
+];

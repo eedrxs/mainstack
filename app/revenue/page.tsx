@@ -1,13 +1,13 @@
 'use client'
 import Image from "next/image"
-import NoResult from "../components/NoResult"
+import NoResult from "../common/components/NoResult"
 
 import InfoIcon from "@/public/images/info.svg"
 import CaretDownIcon from "@/public/images/caret-down.svg"
 import DownloadIcon from "@/public/images/download.svg"
 import IncomingIcon from "@/public/images/incoming.svg"
 import OutgoingIcon from "@/public/images/outgoing.svg"
-import Filter from "../components/Filter"
+import Filter from "../common/components/Filter"
 
 const Revenue = () => {
 

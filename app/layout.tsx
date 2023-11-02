@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import Navbar from "./components/Navbar"
-import Sidebar from "./components/Sidebar"
+import Navbar from "./common/components/Navbar"
+import Sidebar from "./common/components/Sidebar"
+import AccountProvider from "./common/hooks/useAccount"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -19,13 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <main className="flex">
-          <Sidebar />
-          <div className="grow px-[76px] mt-[calc(76px+64px)] pb-[15rem]">
-            <div className="max-w-[1160px]">{children}</div>
-          </div>
-        </main>
+        <AccountProvider>
+          <Navbar />
+          <main className="flex">
+            <Sidebar />
+            <div className="grow px-[76px] mt-[calc(76px+64px)] pb-[15rem]">
+              <div className="max-w-[1160px]">{children}</div>
+            </div>
+          </main>
+        </AccountProvider>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/datepicker.min.js"></script>
       </body>

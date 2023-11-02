@@ -5,7 +5,7 @@ import Select, { components, StylesConfig } from "react-select";
 import CaretUpIcon from "@/public/images/caret-up.svg"
 import CaretDownIcon from "@/public/images/caret-down.svg"
 
-const SelectInput: React.FC<SelectInputProps> = ({options}) => {
+const SelectInput: React.FC<SelectInputProps> = ({options, value, onSelect}) => {
   const [selectedOptions, setSelectedOptions] = useState<any[]>([]);
 
   return (
@@ -19,9 +19,10 @@ const SelectInput: React.FC<SelectInputProps> = ({options}) => {
         hideSelectedOptions={false}
         onChange={(options) => {
           if (Array.isArray(options)) {
-            setSelectedOptions(options.map((opt) => opt.value));
+            onSelect(options.map((opt) => opt));
           }
         }}
+        value={value}
         styles={customStyles}
         options={options}
         components={{
@@ -39,6 +40,8 @@ export default SelectInput
 
 type SelectInputProps = {
   options: {value: string, label: string}[]
+  value: any[]
+  onSelect: (val: any) => void
 }
 
 const InputOption: React.FC<any> = ({
@@ -95,15 +98,6 @@ const MultiValue: React.FC<any> = (props) => (
     <div className="whitespace-nowrap">{props.data.label}{props.selectProps.value.length > 1 && ", "}</div>
   </components.MultiValue>
 );
-
-const allOptions = [
-  { value: "1", label: "Store Transactions" },
-  { value: "2", label: "Get Tipped" },
-  { value: "3", label: "Withdrawals" },
-  { value: "4", label: "Chargebacks" },
-  { value: "5", label: "Cashbacks" },
-  { value: "6", label: "Refer & Earn" },
-];
 
 const customStyles: StylesConfig = {
   control: (base, state) => ({

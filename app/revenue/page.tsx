@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Image from "next/image"
 import axios from "axios"
 import moment from "moment"
@@ -19,9 +19,24 @@ const Revenue = () => {
   const [wallet, setWallet] = useState<IWallet>()
   const [transactions, setTransactions] = useState<ITransaction[]>([])
   const [filterOpen, setFilterOpen] = useState(false)
-  const [dateRange, setDateRange] = useState({ start: null, end: null })
-  const [transactionType, setTransactionType] = useState()
-  const [transactionStatus, setTransactionStatus] = useState()
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
+  const [transactionType, setTransactionType] = useState([])
+  const [transactionStatus, setTransactionStatus] = useState([])
+
+  const activatedFilterNumber = useMemo(() => {
+    let filterNumber = 0
+    if (transactionType.length > 0) filterNumber++
+    if (transactionStatus.length > 0) filterNumber++
+    if (startDate || endDate) filterNumber++
+
+    return filterNumber
+  }, [
+    startDate,
+    endDate,
+    transactionType,
+    transactionStatus,
+  ])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,7 +91,18 @@ const Revenue = () => {
     return sortedTransactions
   }
 
-  const handleClearFilter = () => {}
+  useEffect(() => {
+    console.log({transactionType, transactionStatus})
+  })
+
+  const handleClearFilter = () => {
+    setStartDate(null)
+    setEndDate(null)
+    setTransactionType([])
+    setTransactionStatus([])
+
+  }
+
   return (
     <div>
       <div className="flex justify-between mb-[86px]">
@@ -172,11 +198,15 @@ const Revenue = () => {
         </div>
 
         <div className="flex gap-3">
-          <button data-testid="filter-button" onClick={toggleFilter} className="button mr-3">
+          <button
+            data-testid="filter-button"
+            onClick={toggleFilter}
+            className="button mr-3"
+          >
             Filter
-            <div className="flex items-center justify-center w-5 h-5 bg-primary text-white text-xs rounded-full py-1 px-[6.5px]">
-              3
-            </div>
+            {Boolean(activatedFilterNumber) && <div className="flex items-center justify-center w-5 h-5 bg-primary text-white text-xs rounded-full py-1 px-[6.5px]">
+              {activatedFilterNumber}
+            </div>}
             <Image src={CaretDownIcon} alt="filter" />
           </button>
           <button className="button">
@@ -256,7 +286,18 @@ const Revenue = () => {
         lockBackgroundScroll
       >
         <div>
-          <Filter toggleFilter={toggleFilter} />
+          <Filter
+            toggleFilter={toggleFilter}
+            startDate={startDate}
+            endDate={endDate}
+            transactionType={transactionType}
+            transactionStatus={transactionStatus}
+            onStartDate={setStartDate}
+            onEndDate={setEndDate}
+            onTransactionType={setTransactionType}
+            onTransationStatus={setTransactionStatus}
+            onClearFilter={handleClearFilter}
+          />
         </div>
       </Drawer>
     </div>

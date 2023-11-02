@@ -5,7 +5,7 @@ import DateInput from './DateInput';
 
 import XIcon from "@/public/images/x-icon.svg"
 
-const Filter: React.FC<FilterProps> = ({toggleFilter}) => {
+const Filter: React.FC<any> = ({toggleFilter, startDate, endDate, transactionType, transactionStatus, onStartDate, onEndDate, onTransactionType, onTransationStatus, onClearFilter}) => {
   const boxShadow = "0px 8px 16px 4px rgba(188, 196, 204, 0.10), 0px 12px 24px 0px rgba(219, 222, 229, 0.10), 0px 16px 32px 0px rgba(219, 222, 229, 0.10)"
   const backdropFilter = "blur(8px)"
 
@@ -31,25 +31,25 @@ const Filter: React.FC<FilterProps> = ({toggleFilter}) => {
         <div className='mb-6'>
           <p className="font-semibold -tracking-[0.4px] mb-3">Date Range</p>
           <div className="flex justify-between gap-[6px]">
-            <DateInput />
-            <DateInput />
+            <DateInput value={startDate} onSelect={onStartDate}  />
+            <DateInput value={endDate} onSelect={onEndDate} />
           </div>
         </div>
         {/* transaction type */}
         <div className='mb-6'>
           <p className="font-semibold -tracking-[0.4px] mb-3">Transaction Type</p>
-          <SelectInput options={transactionTypeOptions} />
+          <SelectInput options={transactionTypeOptions} value={transactionType} onSelect={onTransactionType} />
         </div>
         {/* transaction status */}
         <div>
           <p className="font-semibold -tracking-[0.4px] mb-3">Transaction Status</p>
-          <SelectInput options={transactionStatusOptions} />
+          <SelectInput options={transactionStatusOptions} value={transactionStatus} onSelect={onTransationStatus} />
         </div>
       </div>
 
       {/* clear x apply */}
       <div className='flex justify-between py-5 px-[2px]'>
-        <button className='border border-[#EFF1F6] rounded-full w-[198px] px-6 py-3'>Clear</button>
+        <button onClick={onClearFilter} className='border border-[#EFF1F6] rounded-full w-[198px] px-6 py-3'>Clear</button>
         <button className='bg-primary text-white border border-[#EFF1F6] rounded-full w-[198px] px-6 py-3'>Apply</button>
       </div>
     </div>

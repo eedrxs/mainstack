@@ -10,7 +10,7 @@ const Filter: React.FC<FilterProps> = ({toggleFilter}) => {
   const backdropFilter = "blur(8px)"
 
   return (
-    <div style={{boxShadow, backdropFilter}} className="flex flex-col rounded-[20px] bg-white w-[456px] h-full px-[22px]">
+    <div data-testid="filter-component" style={{boxShadow, backdropFilter}} className="flex flex-col rounded-[20px] bg-white w-[456px] h-full px-[22px]">
       {/* heading */}
       <div className="flex justify-between items-center py-5 px-[2px]">
         <p className="font-bold text-2xl">Filter</p>

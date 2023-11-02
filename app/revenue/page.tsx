@@ -172,7 +172,7 @@ const Revenue = () => {
         </div>
 
         <div className="flex gap-3">
-          <button onClick={toggleFilter} className="button mr-3">
+          <button data-testid="filter-button" onClick={toggleFilter} className="button mr-3">
             Filter
             <div className="flex items-center justify-center w-5 h-5 bg-primary text-white text-xs rounded-full py-1 px-[6.5px]">
               3
@@ -244,8 +244,6 @@ const Revenue = () => {
           })}
 
         {!transactions.length && <NoResult onClearFilter={handleClearFilter} />}
-
-        {/* <Filter toggleFilter={toggleFilter} /> */}
       </div>
 
       <Drawer

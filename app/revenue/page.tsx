@@ -9,6 +9,7 @@ import IncomingIcon from "@/public/images/incoming.svg"
 import OutgoingIcon from "@/public/images/outgoing.svg"
 import Filter from "../common/components/Filter"
 import Chart from "../common/components/Chart"
+import Menu from "../common/components/Menu"
 
 const Revenue = () => {
 
@@ -123,9 +124,9 @@ const Revenue = () => {
           </div>
         </div> */}
 
-        {/* <NoResult onClearFilter={handleClearFilter} /> */}
+        <NoResult onClearFilter={handleClearFilter} />
 
-        <Filter />
+        {/* <Filter /> */}
       </div>
 
       <div></div>

@@ -37,7 +37,7 @@ const Navbar = () => {
             let isCurrentPage = currentPath == page.route
             const activePage = isCurrentPage
               ? "text-white bg-primary"
-              : "text-[#56616B]"
+              : "text-[#56616B] hover:bg-[#EFF1F6]"
 
             return (
               <Link
@@ -45,7 +45,7 @@ const Navbar = () => {
                 href={page.route}
                 className={
                   activePage +
-                  " flex items-center text-sm font-semibold rounded-full h-10 py-2 pl-[14px] pr-[18px]"
+                  " flex items-center transition duration-500 text-sm font-semibold rounded-full h-10 py-2 pl-[14px] pr-[18px]"
                 }
               >
                 {!isCurrentPage && (

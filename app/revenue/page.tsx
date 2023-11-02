@@ -8,6 +8,7 @@ import DownloadIcon from "@/public/images/download.svg"
 import IncomingIcon from "@/public/images/incoming.svg"
 import OutgoingIcon from "@/public/images/outgoing.svg"
 import Filter from "../common/components/Filter"
+import Chart from "../common/components/Chart"
 
 const Revenue = () => {
 
@@ -17,9 +18,9 @@ const Revenue = () => {
     <div>
       <div className="flex justify-between mb-[86px]">
         {/* left */}
-        <div>
+        <div className="grow mr-[124px]">
           {/* balance x withdraw */}
-          <div className="flex items-center gap-16 mb-4">
+          <div className="flex items-center gap-16 mb-8">
             <div>
               <p className="font-medium text-sm text-[#56616B] -tracking-[0.2px] mb-2">
                 Available Balance
@@ -34,12 +35,7 @@ const Revenue = () => {
           </div>
 
           {/* chart */}
-          <div className="h-[20rem] w-[765px] border border-black"></div>
-          <div className="line" ></div>
-          <div className="flex justify-between text-[#56616B] text-sm font-medium">
-            <p>Apr 1 ,  2022</p>
-            <p>Apr 30 ,  2022</p>
-          </div>
+          <Chart />
         </div>
 
         {/* right */}

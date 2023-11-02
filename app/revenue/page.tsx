@@ -82,7 +82,7 @@ const Revenue = () => {
           </div>
 
           {/* chart */}
-          <Chart />
+          <Chart data={transactions} dataKey="amount" />
         </div>
 
         {/* right */}
@@ -220,7 +220,7 @@ const Revenue = () => {
         direction="right"
         size={456}
         overlayColor="#e7e7e7"
-        overlayOpacity={0.2}
+        overlayOpacity={0.8}
         lockBackgroundScroll
       >
         <div>

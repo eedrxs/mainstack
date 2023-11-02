@@ -61,8 +61,6 @@ const Navbar = () => {
             const activePageStyle = isCurrentPage
               ? "text-white bg-primary"
               : "text-[#56616B] hover:bg-[#EFF1F6]"
-            const pageWithSubpagesStyle =
-              isCurrentPage && subpages ? "border-r border-[#ffffff30]" : ""
 
             const currentSubpage = page.routes?.find(
               (route) => route.route == currentPath
@@ -71,15 +69,13 @@ const Navbar = () => {
             return (
               <div
                 className={
-                  activePageStyle + " flex rounded-full text-sm font-semibold"
+                  activePageStyle + " flex rounded-full text-sm font-semibold transition duration-500"
                 }
               >
                 <Link
                   key={page.title}
                   href={page.route}
-                  className={
-                    pageWithSubpagesStyle +
-                    " flex items-center transition duration-500 h-10 py-2 pl-[14px] pr-[18px]"
+                  className={"flex items-center h-10 py-2 pl-[14px] pr-[18px]"
                   }
                 >
                   {!isCurrentPage && (
@@ -94,8 +90,9 @@ const Navbar = () => {
                   )}
                   {page.title}
                 </Link>
+                {/* subpages */}
                 {currentSubpage && (
-                  <div className="group flex items-center relative cursor-pointer transition duration-500 h-10 py-2 pl-[14px] pr-[18px]">
+                  <div className="group flex items-center relative border-l border-[#ffffff30] cursor-pointer h-10 py-2 pl-[14px] pr-[18px]">
                     <span className="whitespace-nowrap mr-1">{currentSubpage?.title}</span>{" "}
                     <span className="text-lg">
                       <IoIosArrowDown />
@@ -175,7 +172,7 @@ const pages = [
     },
   },
   {
-    route: "/apps/link-in-bio",
+    route: "/apps",
     title: "Apps",
     icon: {
       outline: BiGridAlt,

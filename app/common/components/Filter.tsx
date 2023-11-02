@@ -1,11 +1,11 @@
 'use client';
 import Image from "next/image";
-
-import XIcon from "@/public/images/x-icon.svg"
 import SelectInput from './SelectInput';
 import DateInput from './DateInput';
 
-const Filter = () => {
+import XIcon from "@/public/images/x-icon.svg"
+
+const Filter: React.FC<FilterProps> = ({toggleFilter}) => {
   const boxShadow = "0px 8px 16px 4px rgba(188, 196, 204, 0.10), 0px 12px 24px 0px rgba(219, 222, 229, 0.10), 0px 16px 32px 0px rgba(219, 222, 229, 0.10)"
   const backdropFilter = "blur(8px)"
 
@@ -14,7 +14,7 @@ const Filter = () => {
       {/* heading */}
       <div className="flex justify-between items-center py-5 px-[2px]">
         <p className="font-bold text-2xl">Filter</p>
-        <div className="p-1">
+        <div onClick={toggleFilter} className="p-1">
           <Image src={XIcon} alt="x icon" />
         </div>
       </div>
@@ -57,6 +57,10 @@ const Filter = () => {
 }
 
 export default Filter;
+
+type FilterProps = {
+  toggleFilter: () => void
+}
 
 const periods = [
   {

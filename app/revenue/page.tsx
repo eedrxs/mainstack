@@ -33,7 +33,7 @@ const Revenue = () => {
       Promise.all([walletCall, transactionsCall]).then(
         ([wallet, transactions]) => {
           setWallet(wallet.data)
-          setTransactions(transactions.data)
+          setTransactions(filterTransactions(transactions.data))
         }
       )
     }
@@ -57,6 +57,23 @@ const Revenue = () => {
     } else if (type == "withdrawal") {
       return { title: "Cash withdrawal", subtext, date }
     }
+  }
+
+  const filterTransactions = (transactions: ITransaction[]) => {
+    const sortedTransactions = transactions.sort((a, b) => {
+      const dateA = moment(a.date)
+      const dateB = moment(b.date)
+
+      if (dateA.isBefore(dateB)) {
+        return 1
+      } else if (dateA.isAfter(dateB)) {
+        return -1
+      } else {
+        return 0
+      }
+    })
+
+    return sortedTransactions
   }
 
   const handleClearFilter = () => {}
@@ -147,7 +164,7 @@ const Revenue = () => {
       <div className="flex justify-between border-b border-[#EFF1F6] pb-6 mb-[33px]">
         <div>
           <p className="font-bold text-2xl -tracking-[0.6px]">
-            {transactions.length} Transaction{transactions.length && "s"}
+            {transactions.length} Transaction{transactions.length ? "s" : ""}
           </p>
           <p className="text-[#56616B] text-sm font-medium">
             Your transactions for the last 7 days
@@ -174,28 +191,43 @@ const Revenue = () => {
         {!transactions.length ||
           transactions.map((transaction) => {
             const transactionInfo = formatTransaction(transaction)
-            const isDeposit = transaction.type == 'deposit'
+            const isDeposit = transaction.type == "deposit"
 
             return (
               <div className="flex items-center justify-between">
                 <div className="flex">
-                  <div className={(isDeposit ? "bg-[#E3FCF2]" : "bg-[#F9E3E0]") + " flex items-center justify-center rounded-full h-12 w-12 shrink-0 mr-[14.5px]"}>
-                    <Image src={isDeposit ? IncomingIcon : OutgoingIcon} alt="icon" />
+                  <div
+                    className={
+                      (isDeposit ? "bg-[#E3FCF2]" : "bg-[#F9E3E0]") +
+                      " flex items-center justify-center rounded-full h-12 w-12 shrink-0 mr-[14.5px]"
+                    }
+                  >
+                    <Image
+                      src={isDeposit ? IncomingIcon : OutgoingIcon}
+                      alt="icon"
+                    />
                   </div>
 
                   <div className="-tracking-[0.2px]">
                     <p className="font-medium text-primary mb-1">
                       {transactionInfo?.title}
                     </p>
-                    {transactionInfo?.subtext == 'Successful' && <p className="font-medium text-sm text-[#0EA163] -tracking-[0.2px]">
-                      {transactionInfo?.subtext}
-                    </p>}
-                    {transactionInfo?.subtext == 'Pending' && <p className="font-medium text-sm text-[#A77A07] -tracking-[0.2px]">
-                      {transactionInfo?.subtext}
-                    </p>}
-                    {(transactionInfo?.subtext != 'Successful' && transactionInfo?.subtext != 'Pending') && <p className="font-medium text-sm text-[#56616B] -tracking-[0.2px]">
-                      {transactionInfo?.subtext}
-                    </p>}
+                    {transactionInfo?.subtext == "Successful" && (
+                      <p className="font-medium text-sm text-[#0EA163] -tracking-[0.2px]">
+                        {transactionInfo?.subtext}
+                      </p>
+                    )}
+                    {transactionInfo?.subtext == "Pending" && (
+                      <p className="font-medium text-sm text-[#A77A07] -tracking-[0.2px]">
+                        {transactionInfo?.subtext}
+                      </p>
+                    )}
+                    {transactionInfo?.subtext != "Successful" &&
+                      transactionInfo?.subtext != "Pending" && (
+                        <p className="font-medium text-sm text-[#56616B] -tracking-[0.2px]">
+                          {transactionInfo?.subtext}
+                        </p>
+                      )}
                   </div>
                 </div>
 
@@ -212,6 +244,8 @@ const Revenue = () => {
           })}
 
         {!transactions.length && <NoResult onClearFilter={handleClearFilter} />}
+
+        {/* <Filter toggleFilter={toggleFilter} /> */}
       </div>
 
       <Drawer
@@ -224,7 +258,7 @@ const Revenue = () => {
         lockBackgroundScroll
       >
         <div>
-          <Filter />
+          <Filter toggleFilter={toggleFilter} />
         </div>
       </Drawer>
     </div>

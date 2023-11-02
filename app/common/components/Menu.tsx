@@ -1,3 +1,5 @@
+import { useAccountContext } from "../hooks/useAccount"
+
 import {LiaCogSolid} from "react-icons/lia"
 import {IoReceiptOutline} from "react-icons/io5"
 import {CiGift, CiLogout} from "react-icons/ci"
@@ -6,6 +8,7 @@ import {VscBug} from "react-icons/vsc"
 import {PiUserSquare} from "react-icons/pi"
 
 const Menu: React.FC<MenuProps> = ({isOpen}) => {
+  const user = useAccountContext()
   const boxShadow =
     "0px 8px 16px 4px rgba(188, 196, 204, 0.10), 0px 12px 24px 0px rgba(219, 222, 229, 0.10), 0px 16px 32px 0px rgba(219, 222, 229, 0.10)"
   const backdropFilter = "blur(8px)"
@@ -20,14 +23,14 @@ const Menu: React.FC<MenuProps> = ({isOpen}) => {
       <div className="flex items-center px-3 mb-6">
         <div
           style={{ backgroundImage: accountInitialsGradient }}
-          className="flex justify-center items-center shrink-0 rounded-full text-white font-semibold h-12 w-12 mr-3"
+          className="flex justify-center items-center shrink-0 rounded-full text-white text-xl font-semibold h-12 w-12 mr-3"
         >
-          OJ
+          {user?.initials}
         </div>
 
         <div>
-          <p className="font-medium text-lg mb-1">Olivier Jones</p>
-          <p className="text-sm text-[#56616B]">olivierjones@gmail.com</p>
+          <p className="font-medium text-lg mb-1">{user?.fullName}</p>
+          <p className="text-sm text-[#56616B]">{user?.email}</p>
         </div>
       </div>
 
@@ -59,7 +62,7 @@ const menuItems = [
     icon: IoReceiptOutline
   },
   {
-    label: 'Reger and Earn',
+    label: 'Refer and Earn',
     icon: CiGift
   },
   {

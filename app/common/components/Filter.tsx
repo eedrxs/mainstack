@@ -10,7 +10,7 @@ const Filter = () => {
   const backdropFilter = "blur(8px)"
 
   return (
-    <div style={{boxShadow, backdropFilter}} className="rounded-[20px] bg-white w-[456px] px-[22px]">
+    <div style={{boxShadow, backdropFilter}} className="flex flex-col rounded-[20px] bg-white w-[456px] h-full px-[22px]">
       {/* heading */}
       <div className="flex justify-between items-center py-5 px-[2px]">
         <p className="font-bold text-2xl">Filter</p>
@@ -19,7 +19,8 @@ const Filter = () => {
         </div>
       </div>
 
-      <div className="mb-48">
+      {/*  className="mb-48" */}
+      <div className="grow mb-10">
         {/* time periods */}
         <div className="flex gap-3 flex-nowrap overflow-auto no-scrollbar mb-7">
           {periods.map(period => (

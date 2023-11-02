@@ -1,10 +1,13 @@
 'use client'
-import { createContext, useEffect, useState } from "react";
+import axios from "axios";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AccountContext = createContext<User | undefined>({
   firstName: '',
   lastName: '',
-  email: ''
+  fullName: '',
+  email: '',
+  initials: '',
 })
 
 const AccountProvider: React.FC<AccountProviderProps> = ({children}) => {
@@ -12,14 +15,14 @@ const AccountProvider: React.FC<AccountProviderProps> = ({children}) => {
   
   useEffect(() => {
     const getUserDetails = async () => {
-      const res = await fetch('https://fe-task-api.mainstack.io/user', {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        },
-        method: 'GET'
-      })
-      const user = await res.json()
-      console.log(user)
+      const {data} = await axios.get('https://fe-task-api.mainstack.io/user')
+      const user = {
+        firstName: data.first_name,
+        lastName: data.last_name,
+        fullName: data.first_name + " " + data.last_name,
+        email: data.email,
+        initials: data.first_name[0] + data.last_name[0]
+      }
       setUser(user)
     }
 
@@ -42,5 +45,11 @@ type AccountProviderProps = {
 interface User {
   firstName: string
   lastName: string
+  fullName: string
   email: string
+  initials: string
+}
+
+export const useAccountContext = () => {
+  return useContext(AccountContext)
 }

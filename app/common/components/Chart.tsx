@@ -47,8 +47,8 @@ const data = [
 const Chart = () => {
   return (
     <div>
-      <div className="max-w-[700px]">
-        <LineChart width={700} height={260} data={data}>
+      <div className="max-w-[765px]">
+        <LineChart width={765} height={260} className="w-full" data={data}>
           <Line type="monotone" dataKey="uv" stroke="#FF5403" dot={false} />
         </LineChart>
       </div>

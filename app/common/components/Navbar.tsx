@@ -1,5 +1,5 @@
 "use client"
-import {useState} from "react"
+import {useRef, useState} from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -15,13 +15,20 @@ import NotificationIcon from "@/public/images/notifications.svg"
 import ChatIcon from "@/public/images/chat.svg"
 import BurgerIcon from "@/public/images/menu.svg"
 import Menu from "./Menu"
+import { useAccountContext } from "../hooks/useAccount"
 
 const Navbar = () => {
   const currentPath = usePathname()
+  const user = useAccountContext()
   const [menuIsOpen, setMenuIsOpen] = useState(false)
+
   const navShadow =
     "0px 2px 4px 0px rgba(45, 59, 67, 0.05), 0px 2px 6px 0px rgba(45, 59, 67, 0.06)"
   const accountInitialsGradient = "linear-gradient(139deg, #5C6670 2.33%, #131316 96.28%)"
+
+  const toggleMenu = () => {
+    setMenuIsOpen(prev => !prev)
+  }
 
   return (
     <nav className="fixed top-0 z-10 w-full bg-white p-4 pb-0">
@@ -35,7 +42,7 @@ const Navbar = () => {
         </div>
 
         {/* pages */}
-        <div className="flex items-center gap-5">
+        <div className="hidden md:flex items-center gap-5">
           {pages.map((page) => {
             let isCurrentPage = currentPath == page.route
             const activePage = isCurrentPage
@@ -69,16 +76,16 @@ const Navbar = () => {
 
         {/* menu */}
         <div className="flex gap-2 items-center">
-          <div className="p-[10px]">
+          <div className="cursor-pointer p-[10px]">
             <Image src={NotificationIcon} alt="notification" />
           </div>
 
-          <div className="p-[10px]">
+          <div className="cursor-pointer p-[10px]">
             <Image src={ChatIcon} alt="chat" />
           </div>
 
-          <div onClick={() => setMenuIsOpen(prev => !prev)} className="flex items-center relative rounded-full bg-[#EFF1F6] gap-2 py-1 pl-[5px] pr-3">
-            <div style={{backgroundImage: accountInitialsGradient}} className="flex justify-center items-center shrink-0 rounded-full text-white font-semibold h-8 w-8">OJ</div>
+          <div onClick={toggleMenu} className="flex items-center relative cursor-pointer rounded-full bg-[#EFF1F6] gap-2 py-1 pl-[5px] pr-3">
+            <div style={{backgroundImage: accountInitialsGradient}} className="flex justify-center items-center shrink-0 rounded-full text-white font-semibold h-8 w-8">{user?.initials}</div>
 
             <Image src={BurgerIcon} alt="menu" />
 

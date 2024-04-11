@@ -13,8 +13,12 @@ const SubNav: React.FC<SubNavProps> = ({ routes }) => {
         className="rounded-[20px] bg-white w-[356px] px-3 py-5"
       >
         <div className="flex flex-col gap-2.5">
-          {routes.map((route) => (
-            <Link href={route.route} className="flex items-center font-medium hover:shadow-sm rounded-[10px] p-[14px] cursor-pointer">
+          {routes.map((route, index) => (
+            <Link
+              key={index}
+              href={route.route}
+              className="flex items-center font-medium hover:shadow-sm rounded-[10px] p-[14px] cursor-pointer"
+            >
               <div className="border border-[#EFF1F6] rounded-lg p-2 mr-3">
                 <Image src={route.iconUrl} alt="icon" />
               </div>
@@ -38,8 +42,8 @@ type SubNavProps = {
 }
 
 type Route = {
-  route: string,
-  title: string,
-  description: string,
-  iconUrl: string,
+  route: string
+  title: string
+  description: string
+  iconUrl: string
 }

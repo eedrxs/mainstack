@@ -51,7 +51,7 @@ const Navbar = () => {
 
         {/* pages */}
         <div className="hidden md:flex items-center gap-5">
-          {pages.map((page) => {
+          {pages.map((page, index) => {
             const subpages = page.routes
             let isCurrentPage = currentPath == page.route
             if (subpages && currentPath.startsWith(page.route)) {
@@ -68,15 +68,16 @@ const Navbar = () => {
 
             return (
               <div
+                key={index}
                 className={
-                  activePageStyle + " flex rounded-full text-sm font-semibold transition duration-500"
+                  activePageStyle +
+                  " flex rounded-full text-sm font-semibold transition duration-500"
                 }
               >
                 <Link
                   key={page.title}
                   href={page.route}
-                  className={"flex items-center h-10 py-2 pl-[14px] pr-[18px]"
-                  }
+                  className={"flex items-center h-10 py-2 pl-[14px] pr-[18px]"}
                 >
                   {!isCurrentPage && (
                     <span className="mr-1">
@@ -93,7 +94,9 @@ const Navbar = () => {
                 {/* subpages */}
                 {currentSubpage && (
                   <div className="group flex items-center relative border-l border-[#ffffff30] cursor-pointer h-10 py-2 pl-[14px] pr-[18px]">
-                    <span className="whitespace-nowrap mr-1">{currentSubpage?.title}</span>{" "}
+                    <span className="whitespace-nowrap mr-1">
+                      {currentSubpage?.title}
+                    </span>{" "}
                     <span className="text-lg">
                       <IoIosArrowDown />
                     </span>

@@ -1,13 +1,13 @@
 import { useAccountContext } from "../hooks/useAccount"
 
-import {LiaCogSolid} from "react-icons/lia"
-import {IoReceiptOutline} from "react-icons/io5"
-import {CiGift, CiLogout} from "react-icons/ci"
-import {BiGridAlt} from "react-icons/bi"
-import {VscBug} from "react-icons/vsc"
-import {PiUserSquare} from "react-icons/pi"
+import { LiaCogSolid } from "react-icons/lia"
+import { IoReceiptOutline } from "react-icons/io5"
+import { CiGift, CiLogout } from "react-icons/ci"
+import { BiGridAlt } from "react-icons/bi"
+import { VscBug } from "react-icons/vsc"
+import { PiUserSquare } from "react-icons/pi"
 
-const Menu: React.FC<MenuProps> = ({isOpen}) => {
+const Menu: React.FC<MenuProps> = ({ isOpen }) => {
   const user = useAccountContext()
   const boxShadow =
     "0px 8px 16px 4px rgba(188, 196, 204, 0.10), 0px 12px 24px 0px rgba(219, 222, 229, 0.10), 0px 16px 32px 0px rgba(219, 222, 229, 0.10)"
@@ -17,7 +17,7 @@ const Menu: React.FC<MenuProps> = ({isOpen}) => {
 
   return (
     <div
-      style={{ boxShadow, backdropFilter, display: isOpen ? 'block' : 'none' }}
+      style={{ boxShadow, backdropFilter, display: isOpen ? "block" : "none" }}
       className="absolute right-0 top-[150%] rounded-[20px] bg-white w-[356px] px-4 py-6"
     >
       <div className="flex items-center px-3 mb-6">
@@ -35,12 +35,17 @@ const Menu: React.FC<MenuProps> = ({isOpen}) => {
       </div>
 
       <div className="flex flex-col gap-2.5">
-        {menuItems.map(menuItem => (<div>
-          <div className="flex items-center font-medium hover:bg-[#EFF1F6] rounded-[10px] p-[14px] cursor-pointer">
-            <span className="text-xl mr-2">{<menuItem.icon />}</span>
-            {menuItem.label}
+        {menuItems.map((menuItem, index) => (
+          <div>
+            <div
+              key={index}
+              className="flex items-center font-medium hover:bg-[#EFF1F6] rounded-[10px] p-[14px] cursor-pointer"
+            >
+              <span className="text-xl mr-2">{<menuItem.icon />}</span>
+              {menuItem.label}
+            </div>
           </div>
-        </div>))}
+        ))}
       </div>
     </div>
   )
@@ -54,31 +59,31 @@ type MenuProps = {
 
 const menuItems = [
   {
-    label: 'Settings',
-    icon: LiaCogSolid
+    label: "Settings",
+    icon: LiaCogSolid,
   },
   {
-    label: 'Purchase History',
-    icon: IoReceiptOutline
+    label: "Purchase History",
+    icon: IoReceiptOutline,
   },
   {
-    label: 'Refer and Earn',
-    icon: CiGift
+    label: "Refer and Earn",
+    icon: CiGift,
   },
   {
-    label: 'Integrations',
-    icon: BiGridAlt
+    label: "Integrations",
+    icon: BiGridAlt,
   },
   {
-    label: 'Report Bug',
-    icon: VscBug
+    label: "Report Bug",
+    icon: VscBug,
   },
   {
-    label: 'Switch Account',
-    icon: PiUserSquare
+    label: "Switch Account",
+    icon: PiUserSquare,
   },
   {
-    label: 'Sign Out',
-    icon: CiLogout
+    label: "Sign Out",
+    icon: CiLogout,
   },
 ]

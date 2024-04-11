@@ -50,7 +50,7 @@ const Revenue = () => {
     }
 
     fetchData()
-  }, [])
+  }, [startDate, endDate, transactionType, transactionStatus])
 
   const toggleFilter = () => {
     setFilterOpen((prev) => !prev)

@@ -1,4 +1,5 @@
 "use client"
+import { useState } from "react"
 import Image from "next/image"
 import moment from "moment"
 import SelectInput from "./SelectInput"
@@ -20,18 +21,29 @@ const Filter: React.FC<any> = ({
   onTransationStatus,
   onClearFilter,
 }) => {
+  const [filterStartDate, setFilterStartDate] = useState(new Date())
+  const [filterEndtDate, setFilterEndDate] = useState(new Date())
+
   const boxShadow =
     "0px 8px 16px 4px rgba(188, 196, 204, 0.10), 0px 12px 24px 0px rgba(219, 222, 229, 0.10), 0px 16px 32px 0px rgba(219, 222, 229, 0.10)"
   const backdropFilter = "blur(8px)"
 
   const togglePeriod = (period: (typeof periods)[number]) => {
     if (period.label === selectedPeriod) {
-      onStartDate(moment().toDate())
-      onEndDate(moment().toDate())
+      setFilterStartDate(moment().toDate())
+      onStartDate(null)
+
+      setFilterEndDate(moment().toDate())
+      onEndDate(null)
+      
       onSelectPeriod(null)
     } else {
+      setFilterStartDate(period.startTime().toDate())
       onStartDate(period.startTime().toDate())
+      
+      setFilterEndDate(moment().toDate())
       onEndDate(moment().toDate())
+
       onSelectPeriod(period.label)
     }
   }
@@ -74,24 +86,26 @@ const Filter: React.FC<any> = ({
           <p className="font-semibold -tracking-[0.4px] mb-3">Date Range</p>
           <div className="flex justify-between gap-[6px]">
             <DateInput
-              value={startDate}
+              value={filterStartDate}
               onSelect={(value: any) => {
                 if (selectedPeriod) {
                   onSelectPeriod(null)
                 }
 
                 onStartDate(value)
+                setFilterStartDate(value)
               }}
             />
 
             <DateInput
-              value={endDate}
+              value={filterEndtDate}
               onSelect={(value: any) => {
                 if (selectedPeriod) {
                   onSelectPeriod(null)
                 }
 
                 onEndDate(value)
+                setFilterEndDate(value)
               }}
             />
           </div>
@@ -125,7 +139,11 @@ const Filter: React.FC<any> = ({
       {/* clear x apply */}
       <div className="flex justify-between py-5 px-[2px]">
         <button
-          onClick={onClearFilter}
+          onClick={() => {
+            setFilterStartDate(new Date())
+            setFilterEndDate(new Date())
+            onClearFilter()
+          }}
           className="border border-[#EFF1F6] rounded-full w-[198px] px-6 py-3"
         >
           Clear

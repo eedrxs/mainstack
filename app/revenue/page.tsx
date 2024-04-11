@@ -21,6 +21,7 @@ const Revenue = () => {
   const [filterOpen, setFilterOpen] = useState(false)
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
+  const [selectedPeriod, setSelectedPeriod] = useState(null)
   const [transactionType, setTransactionType] = useState([])
   const [transactionStatus, setTransactionStatus] = useState([])
 
@@ -31,12 +32,7 @@ const Revenue = () => {
     if (startDate || endDate) filterNumber++
 
     return filterNumber
-  }, [
-    startDate,
-    endDate,
-    transactionType,
-    transactionStatus,
-  ])
+  }, [startDate, endDate, transactionType, transactionStatus])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,16 +87,12 @@ const Revenue = () => {
     return sortedTransactions
   }
 
-  useEffect(() => {
-    console.log({transactionType, transactionStatus})
-  })
-
   const handleClearFilter = () => {
     setStartDate(null)
     setEndDate(null)
+    setSelectedPeriod(null)
     setTransactionType([])
     setTransactionStatus([])
-
   }
 
   return (
@@ -204,9 +196,11 @@ const Revenue = () => {
             className="button mr-3"
           >
             Filter
-            {Boolean(activatedFilterNumber) && <div className="flex items-center justify-center w-5 h-5 bg-primary text-white text-xs rounded-full py-1 px-[6.5px]">
-              {activatedFilterNumber}
-            </div>}
+            {Boolean(activatedFilterNumber) && (
+              <div className="flex items-center justify-center w-5 h-5 bg-primary text-white text-xs rounded-full py-1 px-[6.5px]">
+                {activatedFilterNumber}
+              </div>
+            )}
             <Image src={CaretDownIcon} alt="filter" />
           </button>
           <button className="button">
@@ -290,10 +284,12 @@ const Revenue = () => {
             toggleFilter={toggleFilter}
             startDate={startDate}
             endDate={endDate}
+            selectedPeriod={selectedPeriod}
             transactionType={transactionType}
             transactionStatus={transactionStatus}
             onStartDate={setStartDate}
             onEndDate={setEndDate}
+            onSelectPeriod={setSelectedPeriod}
             onTransactionType={setTransactionType}
             onTransationStatus={setTransactionStatus}
             onClearFilter={handleClearFilter}

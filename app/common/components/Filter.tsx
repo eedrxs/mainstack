@@ -70,10 +70,10 @@ const Filter: React.FC<any> = ({
             <button
               key={period.label}
               onClick={() => togglePeriod(period)}
-              className={`shrink-0 font-semibold text-sm -tracking-[0.4px] rounded-full py-[10px] px-[18px] ${
+              className={`shrink-0 font-semibold text-sm -tracking-[0.4px] border rounded-full py-[10px] px-[18px] ${
                 selectedPeriod === period.label
                   ? "bg-black text-white"
-                  : "border border-[#EFF1F6]"
+                  : "border-[#EFF1F6]"
               }`}
             >
               {period.label}

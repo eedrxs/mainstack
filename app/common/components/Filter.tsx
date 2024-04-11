@@ -1,16 +1,47 @@
-'use client';
-import Image from "next/image";
-import SelectInput from './SelectInput';
-import DateInput from './DateInput';
+"use client"
+import Image from "next/image"
+import moment from "moment"
+import SelectInput from "./SelectInput"
+import DateInput from "./DateInput"
 
 import XIcon from "@/public/images/x-icon.svg"
 
-const Filter: React.FC<any> = ({toggleFilter, startDate, endDate, transactionType, transactionStatus, onStartDate, onEndDate, onTransactionType, onTransationStatus, onClearFilter}) => {
-  const boxShadow = "0px 8px 16px 4px rgba(188, 196, 204, 0.10), 0px 12px 24px 0px rgba(219, 222, 229, 0.10), 0px 16px 32px 0px rgba(219, 222, 229, 0.10)"
+const Filter: React.FC<any> = ({
+  toggleFilter,
+  startDate,
+  endDate,
+  selectedPeriod,
+  transactionType,
+  transactionStatus,
+  onStartDate,
+  onEndDate,
+  onSelectPeriod,
+  onTransactionType,
+  onTransationStatus,
+  onClearFilter,
+}) => {
+  const boxShadow =
+    "0px 8px 16px 4px rgba(188, 196, 204, 0.10), 0px 12px 24px 0px rgba(219, 222, 229, 0.10), 0px 16px 32px 0px rgba(219, 222, 229, 0.10)"
   const backdropFilter = "blur(8px)"
 
+  const togglePeriod = (period: (typeof periods)[number]) => {
+    if (period.label === selectedPeriod) {
+      onStartDate(moment().toDate())
+      onEndDate(moment().toDate())
+      onSelectPeriod(null)
+    } else {
+      onStartDate(period.startTime().toDate())
+      onEndDate(moment().toDate())
+      onSelectPeriod(period.label)
+    }
+  }
+
   return (
-    <div data-testid="filter-component" style={{boxShadow, backdropFilter}} className="flex flex-col rounded-[20px] bg-white w-[456px] h-full px-[22px]">
+    <div
+      data-testid="filter-component"
+      style={{ boxShadow, backdropFilter }}
+      className="flex flex-col rounded-[20px] bg-white w-[456px] h-full px-[22px]"
+    >
       {/* heading */}
       <div className="flex justify-between items-center py-5 px-[2px]">
         <p className="font-bold text-2xl">Filter</p>
@@ -23,60 +54,126 @@ const Filter: React.FC<any> = ({toggleFilter, startDate, endDate, transactionTyp
       <div className="grow mb-10">
         {/* time periods */}
         <div className="flex gap-3 flex-nowrap overflow-auto no-scrollbar mb-7">
-          {periods.map(period => (
-            <button key={period.label} className="shrink-0 font-semibold text-sm -tracking-[0.4px] border border-[#EFF1F6] rounded-full py-[10px] px-[18px]">{period.label}</button>
+          {periods.map((period) => (
+            <button
+              key={period.label}
+              onClick={() => togglePeriod(period)}
+              className={`shrink-0 font-semibold text-sm -tracking-[0.4px] rounded-full py-[10px] px-[18px] ${
+                selectedPeriod === period.label
+                  ? "bg-black text-white"
+                  : "border border-[#EFF1F6]"
+              }`}
+            >
+              {period.label}
+            </button>
           ))}
         </div>
+
         {/* date range */}
-        <div className='mb-6'>
+        <div className="mb-6">
           <p className="font-semibold -tracking-[0.4px] mb-3">Date Range</p>
           <div className="flex justify-between gap-[6px]">
-            <DateInput value={startDate} onSelect={onStartDate}  />
-            <DateInput value={endDate} onSelect={onEndDate} />
+            <DateInput
+              value={startDate}
+              onSelect={(value: any) => {
+                if (selectedPeriod) {
+                  onSelectPeriod(null)
+                }
+
+                onStartDate(value)
+              }}
+            />
+
+            <DateInput
+              value={endDate}
+              onSelect={(value: any) => {
+                if (selectedPeriod) {
+                  onSelectPeriod(null)
+                }
+
+                onEndDate(value)
+              }}
+            />
           </div>
         </div>
+
         {/* transaction type */}
-        <div className='mb-6'>
-          <p className="font-semibold -tracking-[0.4px] mb-3">Transaction Type</p>
-          <SelectInput options={transactionTypeOptions} value={transactionType} onSelect={onTransactionType} />
+        <div className="mb-6">
+          <p className="font-semibold -tracking-[0.4px] mb-3">
+            Transaction Type
+          </p>
+          <SelectInput
+            options={transactionTypeOptions}
+            value={transactionType}
+            onSelect={onTransactionType}
+          />
         </div>
+
         {/* transaction status */}
         <div>
-          <p className="font-semibold -tracking-[0.4px] mb-3">Transaction Status</p>
-          <SelectInput options={transactionStatusOptions} value={transactionStatus} onSelect={onTransationStatus} />
+          <p className="font-semibold -tracking-[0.4px] mb-3">
+            Transaction Status
+          </p>
+          <SelectInput
+            options={transactionStatusOptions}
+            value={transactionStatus}
+            onSelect={onTransationStatus}
+          />
         </div>
       </div>
 
       {/* clear x apply */}
-      <div className='flex justify-between py-5 px-[2px]'>
-        <button onClick={onClearFilter} className='border border-[#EFF1F6] rounded-full w-[198px] px-6 py-3'>Clear</button>
-        <button className='bg-primary text-white border border-[#EFF1F6] rounded-full w-[198px] px-6 py-3'>Apply</button>
+      <div className="flex justify-between py-5 px-[2px]">
+        <button
+          onClick={onClearFilter}
+          className="border border-[#EFF1F6] rounded-full w-[198px] px-6 py-3"
+        >
+          Clear
+        </button>
+        <button className="bg-primary text-white border border-[#EFF1F6] rounded-full w-[198px] px-6 py-3">
+          Apply
+        </button>
       </div>
     </div>
-  );
+  )
 }
 
-export default Filter;
+export default Filter
 
 type FilterProps = {
   toggleFilter: () => void
 }
 
+const ISO_Format = "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]"
+
+function startOf(unit: moment.unitOfTime.DurationConstructor) {
+  return () => moment().startOf(unit)
+}
+
+function timeAgo(amount: number, unit: moment.unitOfTime.DurationConstructor) {
+  return () => moment().subtract(amount, unit)
+}
+
 const periods = [
   {
-    label: 'Today'
+    label: "Today",
+    startTime: startOf("day"),
   },
   {
-    label: 'Last 7 days'
+    label: "Last 7 days",
+    startTime: timeAgo(7, "days"),
   },
   {
-    label: 'This month'
+    label: "This month",
+    startTime: startOf("month"),
   },
   {
-    label: 'Last 3 months'
+    label: "Last 3 months",
+    startTime: timeAgo(3, "months"),
   },
   {
-    label: 'This year'
+    label: "This year",
+    startTime: startOf("year"),
   },
 ]
 
@@ -87,10 +184,10 @@ const transactionTypeOptions = [
   { value: "4", label: "Chargebacks" },
   { value: "5", label: "Cashbacks" },
   { value: "6", label: "Refer & Earn" },
-];
+]
 
 const transactionStatusOptions = [
   { value: "1", label: "Successful" },
   { value: "2", label: "Pending" },
   { value: "3", label: "Failed" },
-];
+]

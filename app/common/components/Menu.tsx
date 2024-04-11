@@ -36,11 +36,8 @@ const Menu: React.FC<MenuProps> = ({ isOpen }) => {
 
       <div className="flex flex-col gap-2.5">
         {menuItems.map((menuItem, index) => (
-          <div>
-            <div
-              key={index}
-              className="flex items-center font-medium hover:bg-[#EFF1F6] rounded-[10px] p-[14px] cursor-pointer"
-            >
+          <div key={index}>
+            <div className="flex items-center font-medium hover:bg-[#EFF1F6] rounded-[10px] p-[14px] cursor-pointer">
               <span className="text-xl mr-2">{<menuItem.icon />}</span>
               {menuItem.label}
             </div>
